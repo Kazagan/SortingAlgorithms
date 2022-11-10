@@ -1,5 +1,6 @@
-LAGS=-Wall -Wextra -std=c11 -pedantic -ggdb
+CLAGS=-Wall -Wextra -std=c11 -pedantic -ggdb
 LIBS=-lm
 
 main:
-	$(CC) $(CFLAGS) -o ./build/$1 $1.c $(LIBS)
+	$(CC) $(CFLAGS) -o $1 $1.c $(LIBS)
+	mv $1 ./build/
