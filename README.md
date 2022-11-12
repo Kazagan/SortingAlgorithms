@@ -8,4 +8,4 @@ Steps:
 - [x] string comparer, same as above, for each letter, returning at first character less or greater.
 - [x] use Qsort to ensure my custom comparers are working as expected.
 - [x] Bubble sort ( First step, simple but slow )
-- [] Selection sort
+- [ ] Selection sort
