@@ -19,7 +19,7 @@ void swap(void * first, void * second, size_t element_size)
 
 // First Custom, Bubble sort
 
-void my_sort(void *arry, size_t element_count, size_t element_size, int (*comparer)(const void *, const void *)) {
+void bubble_sort(void *arry, size_t element_count, size_t element_size, int (*comparer)(const void *, const void *)) {
     int is_sorted = 0;
     void *start = arry;
     while(is_sorted != 1) {
@@ -36,3 +36,14 @@ void my_sort(void *arry, size_t element_count, size_t element_size, int (*compar
     }
 }
 
+void my_sort(void *arry, size_t element_count, size_t element_size, int (*comparer)(const void *, const void *)) { 
+    for(int i = 0; i < element_size; i++) {
+        void *smallest = arry + (element_size * i);
+        for(int j = i; j < element_size; j++) {
+            if(comparer(smallest, (arry + (element_size * j))) < 0) {
+                smallest = arry + (element_size * j);
+            }
+        }
+        swap(arry + (element_size * i), smallest, element_size);
+    }
+}
