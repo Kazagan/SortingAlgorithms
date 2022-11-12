@@ -15,6 +15,10 @@ int main() {
     char *unordered_str[10] = { "MARY", "PATRICIA", "LINDA", "BARBARA", "ELIZABETH", "JENNIFER", "MARIA", "SUSAN", "MARGARET", "DOROTHY" };
     char *ordered_str[10] = { "BARBARA", "DOROTHY", "ELIZABETH", "JENNIFER", "LINDA", "MARGARET", "MARIA", "MARY", "PATRICIA", "SUSAN" };
     char *test_str[10] = { "BARBARA", "DOROTHY", "ELIZABETH", "JENNIFER", "LINDA", "MARGARET", "MARIA", "MARY", "PATRICIA", "SUSAN" };
+    
+    // Lets use QSort to tests my compareres for now.
+    qsort(unordered_int, 10, sizeof(int), int_comp);
+    qsort(unordered_str, 10, sizeof(const char*), str_comp);
     // This is where I would call my sorting Algorithm... IF I HAD ONE!!
     
     // Assert equals.
@@ -22,8 +26,8 @@ int main() {
     assert_array(sizeof(int), ordered_int, 10, test_int, 10, int_comp);
     assert_array(sizeof(const char*), ordered_str, 10, test_str, 10, str_comp);
     
-    /* assert_array(sizeof(int), ordered_int, 10, unordered_int, 10, int_comp); */
-    /* assert_array(sizeof(const char*), ordered_str, 10, unordered_str, 10, str_comp); */
+    assert_array(sizeof(int), ordered_int, 10, unordered_int, 10, int_comp);
+    assert_array(sizeof(const char*), ordered_str, 10, unordered_str, 10, str_comp);
 }
 
 int int_comp(const void * first, const void * second) {
