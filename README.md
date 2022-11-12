@@ -7,4 +7,5 @@ Steps:
 - [x] int comparer, should return negative if less, zero if equal, and positive if greater
 - [x] string comparer, same as above, for each letter, returning at first character less or greater.
 - [x] use Qsort to ensure my custom comparers are working as expected.
-- [] Bubble sort ( First step, simple but slow )
+- [x] Bubble sort ( First step, simple but slow )
+- [] Selection sort
