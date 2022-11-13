@@ -7,37 +7,45 @@ int assert_array_not(size_t type_size, void *expected, size_t expected_size, voi
 int int_comp(const void * first, const void * second);
 int str_comp(const void * first,const void * second);
 
-int main() {
-    
-    // Initialize some arrays of differing types.
+int test_int() {
     int unordered_int[10] = { 20, 30, 5, 9, 60, 55, 2, 9, 89, 38 };
     int ordered_int[10] = { 2, 5, 9, 9, 20, 30, 38, 55, 60, 89 };   
-    char *unordered_str[10] = { "MARY", "PATRICIA", "LINDA", "BARBARA", "ELIZABETH", "JENNIFER", "MARIA", "SUSAN", "MARGARET", "DOROTHY" };
-    char *ordered_str[10] = { "BARBARA", "DOROTHY", "ELIZABETH", "JENNIFER", "LINDA", "MARGARET", "MARIA", "MARY", "PATRICIA", "SUSAN" };
+    int *test_malloced = malloc(sizeof(int) * 10);
+    for(int i = 0; i < 10; i++) test_malloced[i] = unordered_int[i];
     
-    // assert different
     assert_array_not(sizeof(int), ordered_int, 10, unordered_int, 10, int_comp);
-    assert_array_not(sizeof(const char*), ordered_str, 10, unordered_str, 10, str_comp);
-    for(int i = 0; i < 10; i++) printf("%d|%d,  ", unordered_int[i], ordered_int[i]); 
-    printf("\n");
-    for(int i = 0; i < 10; i++) printf("%s|%s,  ", unordered_str[i], ordered_str[i]);
-    printf("\n");
-    
-    //sort
+    assert_array_not(sizeof(int), test_malloced, 10, ordered_int, 10, int_comp);
+    /* for(int i = 0; i < 10; i++) printf("%d|%d,  ", unordered_int[i], ordered_int[i]); */ 
+    /* printf("\n"); */
     my_sort(unordered_int, 10, sizeof(int), int_comp);
-    my_sort(unordered_str, 10, sizeof(const char*), str_comp);
-    
-    // assert same
-    for(int i = 0; i < 10; i++) printf("%d|%d,  ", unordered_int[i], ordered_int[i]); 
-    printf("\n");
-    for(int i = 0; i < 10; i++) printf("%s|%s,  ", unordered_str[i], ordered_str[i]);
-    printf("\n");
+    /* for(int i = 0; i < 10; i++) printf("%d|%d,  ", unordered_int[i], ordered_int[i]); */ 
+    /* printf("\n"); */
     assert_array(sizeof(int), ordered_int, 10, unordered_int, 10, int_comp);
-    assert_array(sizeof(const char*), ordered_str, 10, unordered_str, 10, str_comp);
-    
+
+    int test_single[1] = {5};
+
+    my_sort(test_malloced, 10, sizeof(int), int_comp);
+    assert_array(sizeof(int), test_malloced, 10, ordered_int, 10, int_comp);
+    return 0;
 }
 
+int test_str() {
+    char *unordered_str[10] = { "MARY", "PATRICIA", "LINDA", "BARBARA", "ELIZABETH", "JENNIFER", "MARIA", "SUSAN", "MARGARET", "DOROTHY" };
+    char *ordered_str[10] = { "BARBARA", "DOROTHY", "ELIZABETH", "JENNIFER", "LINDA", "MARGARET", "MARIA", "MARY", "PATRICIA", "SUSAN" };
+    assert_array_not(sizeof(const char*), ordered_str, 10, unordered_str, 10, str_comp);
+    my_sort(unordered_str, 10, sizeof(const char*), str_comp);
+    assert_array(sizeof(const char*), ordered_str, 10, unordered_str, 10, str_comp);   
+    return 0;
+}
+
+int main() {
+    test_int();
+    test_str();
+}
+
+
 int int_comp(const void * first, const void * second) {
+    /* printf("first: %d, Second: %d\n", *(int*)first, *(int*)second); */
     return *(int*)first - *(int*)second;
 }
 
