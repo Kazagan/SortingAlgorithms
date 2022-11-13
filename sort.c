@@ -36,8 +36,8 @@ void bubble_sort(void *arry, size_t element_count, size_t element_size, int (*co
     }
 }
 
-void my_sort(void *arry, size_t element_count, size_t element_size, int (*comparer)(const void *, const void *)) { 
-    for(int i = 0; i < element_count; i++) {
+void selection_sort(void *arry, size_t element_count, size_t element_size, int (*comparer)(const void *, const void *)) { 
+    for(int i = 0; i < element_count - 1; i++) {
         void *smallest = arry + (element_size * i);
         for(int j = i+1; j < element_count; j++) {
             void *check = arry + (element_size * j);
@@ -47,4 +47,22 @@ void my_sort(void *arry, size_t element_count, size_t element_size, int (*compar
         }
         swap(arry + (element_size * i), smallest, element_size);
     }
+}
+
+void insertion_sort(void *arry, size_t element_count, size_t element_size, int (*comparer)(const void *, const void *)) { 
+    for(int i = 1; i < element_count; i++) {
+        void *current = arry + (i * element_size);
+        int j = i - 1;
+        void *check = arry + (j * element_size);
+        while(comparer(check, current) > 0) {
+            swap(current, check, element_size);
+            current = arry + (j * element_size); // set pointer for current to it's new location
+            if(j == 0) break; // Avoid going out of array bounds
+            check = arry + (--j * element_size); // set next check
+        }
+    }
+}
+
+void my_sort(void *arry, size_t element_count, size_t element_size, int (*comparer)(const void *, const void *)) { 
+    insertion_sort(arry, element_count, element_size, comparer);
 }
