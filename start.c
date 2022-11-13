@@ -22,6 +22,7 @@ int main() {
     printf("\n");
     for(int i = 0; i < 10; i++) printf("%s|%s,  ", unordered_str[i], ordered_str[i]);
     printf("\n");
+    
     //sort
     my_sort(unordered_int, 10, sizeof(int), int_comp);
     my_sort(unordered_str, 10, sizeof(const char*), str_comp);
@@ -87,4 +88,5 @@ int assert_array_not(size_t type_size, void *expected, size_t expected_size, voi
         printf("Arrays are not different");
         exit(-1);
     }
+    return 0;
 }

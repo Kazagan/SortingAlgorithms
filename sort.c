@@ -37,11 +37,12 @@ void bubble_sort(void *arry, size_t element_count, size_t element_size, int (*co
 }
 
 void my_sort(void *arry, size_t element_count, size_t element_size, int (*comparer)(const void *, const void *)) { 
-    for(int i = 0; i < element_size; i++) {
+    for(int i = 0; i < element_count; i++) {
         void *smallest = arry + (element_size * i);
-        for(int j = i; j < element_size; j++) {
-            if(comparer(smallest, (arry + (element_size * j))) < 0) {
-                smallest = arry + (element_size * j);
+        for(int j = i+1; j < element_count; j++) {
+            void *check = arry + (element_size * j);
+            if(comparer(smallest, check) > 0) {
+                smallest = check;
             }
         }
         swap(arry + (element_size * i), smallest, element_size);
