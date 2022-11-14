@@ -1,6 +1,7 @@
 Repository where I plan to write sorting algorithms in C to help better understand them.
 
-Int Comparisons are working now for equality, allowing me to assert on the arrays, so I can have a sort of unit test for the sorting library
+All sorting algorithms are currenetly being done for arrays of x type. 
+Possibly to get a better understanding I will stretch to also sort linked lists.
 
 Steps:
 - [x] Assertion method to compare two arrays of x type
@@ -10,5 +11,5 @@ Steps:
 - [x] Bubble sort ( First step, simple but slow )
 - [x] Selection sort
 - [x] Insertion sort
-- [x] Merge sort
+- [x] Merge sort ( Should return here to improve speed by replacing smaller array sortings with another sorting algorithm)
 - [ ] quick sort ( pivot point undecided) 
