@@ -10,4 +10,5 @@ Steps:
 - [x] Bubble sort ( First step, simple but slow )
 - [x] Selection sort
 - [x] Insertion sort
-- [ ] Merge sort
+- [x] Merge sort
+- [ ] quick sort ( pivot point undecided) 
