@@ -130,6 +130,31 @@ void merge_sort(void *sort_array, size_t element_count, size_t element_size, int
     mergeSort(sort_array, element_size, 0, element_count - 1, comparer);
 }
 
+int partition(void *sort_array, size_t element_size, int left, int right, int (*comparer)(const void *, const void *)) {
+    void *pivot = sort_array POINTER_INDEX(right);
+    int i = left;
+    for(int current = left; current < right; current++) {
+        if(comparer( pivot, sort_array POINTER_INDEX(current) ) > 0 ) {
+            swap( sort_array POINTER_INDEX(i++), sort_array POINTER_INDEX(current), element_size); 
+        }
+    }
+    swap(pivot, sort_array POINTER_INDEX(i), element_size);
+    return i;
+}
+
+void quickSort(void *sort_array, size_t element_size, int left, int right, int (*comparer)(const void *, const void *)) {
+    if(left >= right) return;
+    int partition_index = partition(sort_array, element_size, left, right, comparer);
+    quickSort(sort_array, element_size, left, partition_index - 1, comparer);
+    quickSort(sort_array, element_size, partition_index + 1, right, comparer);
+}    
+
+void quick_sort(void *sort_array, size_t element_count, size_t element_size, int (*comparer)(const void *, const void *)) {
+    int left = 0;
+    int right = element_count - 1;
+    quickSort(sort_array, element_size, left, right, comparer);
+}
+
 void my_sort(void *sort_array, size_t element_count, size_t element_size, int (*comparer)(const void *, const void *)) {
-    merge_sort(sort_array, element_count, element_size, comparer);
+    quick_sort(sort_array, element_count, element_size, comparer);
 }
