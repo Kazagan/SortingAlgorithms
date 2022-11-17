@@ -12,4 +12,6 @@ Steps:
 - [x] Selection sort
 - [x] Insertion sort
 - [x] Merge sort ( Should return here to improve speed by replacing smaller array sortings with another sorting algorithm)
-- [ ] quick sort ( pivot point undecided) 
+- [x] quick sort  
+- [] ...
+
